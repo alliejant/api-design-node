@@ -38,29 +38,27 @@ app.get("/lions", (req, res, next) => {
 app.post("/lions", (req, res, next) => {
 	id++;
 	const lion = new Lion(...req.body);
+	lion.id = id;
 	lions.push(lion);
 	res.status(201).json(lion);
 });
 
 app.get("/lions/:id", (req, res, next) => {
-	const lion = lions.find(e => e.id === req.params.id);
+	const lion = lions.find(e => e.id === +req.params.id);
 	if (lion) res.status(200).json(lion);
 	else next(new Error("no such thing"));
 });
 
 app.patch("/lions/:id", (req, res, next) => {
-	const lion = lions.find(e => e.id === req.params.id);
+	const lion = lions.find(e => e.id === +req.params.id);
 	if (lion) {
-		lion.name = req.body.name;
-		lion.age = req.body.age;
-		lion.pride = req.body.pride;
-		lion.gender = req.body.gender;
+		lion = Object.assign(lion, req.body);
 		res.status(200).send(lion);
 	} else next(new Error("no such thing"));
 });
 
 app.delete("/lions/:id", (req, res, next) => {
-	const lionIndex = lions.findIndex(e => e.id === req.params.id);
+	const lionIndex = lions.findIndex(e => e.id === +req.params.id);
 	const lion = lions[lionIndex];
 	if (lion) {
 		lions.splice(lionIndex, 1);

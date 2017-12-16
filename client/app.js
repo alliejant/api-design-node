@@ -3983,6 +3983,21 @@ var lionTemplate =
 
 var lions = [];
 
+/*
+
+var makeTemplate = function(data) {
+	var li = document.createElement("li");
+	var lionList = document.querySelector(".lion-list");
+	var lionHtml = `<h3>${data.name}</h3>
+	<h3><${data.pride}</h3>
+	<small>${data.age}</small> 
+	<small>${data.gender}</small>`;
+	li.innerHTML = lionHtml;
+	lionList.insertBefore(li, lionList.firstChild);
+};
+
+*/
+
 var makeTemplate = function(data) {
 	var li = document.createElement("li");
 	var lionList = document.querySelector(".lion-list");
